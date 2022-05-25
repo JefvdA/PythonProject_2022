@@ -1,5 +1,3 @@
-#! /usr/bin/env python3
-
 import json
 import pickle
 
@@ -24,6 +22,8 @@ class VeloApp:
                 stations.add_station(station)
 
         [stations.add_bike() for i in range(4200)] # Add bikes to the stations
+
+        print(stations) # Print the stations
 
     def save_data(self):
         with open(VELO_PICKLE, "wb") as f:

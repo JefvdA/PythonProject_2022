@@ -8,6 +8,7 @@ class Station:
         Station.index += 1
         self.id = Station.index
         self.steetName = streetName
+        self.availableSlots = slots
         self.slots = self.generate_slots(slots)
 
     def generate_slots(self, x):
@@ -16,15 +17,22 @@ class Station:
             slots.append(Slot(str(self.id) + "-" + str(i), None))
         return slots
 
-    def get_slot_amount(self):
+    def get_total_slots(self):
         return len(self.slots)
 
-    def put_bike_in_slot(self, bike):
-        for slot in self.slots:
-            if slot.bike is None:
-                slot.bike = bike
-                return True
-        return False
+    def get_available_slots(self):
+        return self.availableSlots
 
-    def __str__(self):
-        return "Station " + str(self.id) + ": " + self.steetName + " (" + str(self.get_slot_amount()) + " slots)"
+    def put_bike_in_slot(self, bike):
+        if self.availableSlots <= 0:
+            return False # Fail - no slots available
+        
+        # find next available slot with 'availableSlots' - put bike in slot - decrease availableSlots
+        index = len(self.slots) - self.availableSlots
+        self.slots[index].bike = bike
+        self.availableSlots -= 1
+        
+        return True # Succes - slot has been added
+
+    def __str__(self) -> str:
+        return "Station " + str(self.id) + ": " + self.steetName + " (" + str(len(self.slots) - self.availableSlots) + " / " + str(len(self.slots)) + " slots taken)"
