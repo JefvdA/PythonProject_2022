@@ -27,8 +27,6 @@ class VeloApp:
 
         self.users.generate_users(55000) # Generate users
 
-        print(self.users)
-
     def save_data(self):
         with open(VELO_PICKLE, "wb") as f:
             pickle.dump(self, f)
