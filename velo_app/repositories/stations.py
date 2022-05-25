@@ -4,7 +4,7 @@ from classes.bike import Bike
 
 
 class Stations:
-    def __init__(self):
+    def __init__(self) -> None:
         self.stations = []
 
     def add_station(self, station):

@@ -1,4 +1,4 @@
-from velo_app.models.user import User
+from classes.user import User
 
 
 class Transporter(User):
