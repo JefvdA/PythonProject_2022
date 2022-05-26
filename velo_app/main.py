@@ -14,11 +14,12 @@ import screens.initialize_menu as init_menu
 
 
 def main():
-    app = VeloApp()
+    app = VeloApp() ## Initilize the app object
     
-    if(not os.path.exists(VELO_PICKLE)):
+    # Initiliaze the data
+    if(not os.path.exists(VELO_PICKLE)): # If there is no data yet, start fresh
         app.initialize()
-    else:
+    else: # If saved data is found, ask user what to do
         init_menu.run(app)
     
     print(app)
