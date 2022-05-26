@@ -9,7 +9,8 @@ import screens.login.local_screens.transporter_login_menu as transporter_login_m
 
 options = [
     "Log in as a user",
-    "Log in as a transporter"
+    "Log in as a transporter",
+    "Exit the program"
 ]
 
 def run(app: VeloApp):
@@ -27,6 +28,9 @@ def run(app: VeloApp):
             case "2":
                 os.system('clear')
                 transporter_login_menu.run(app)
+            case "3":
+                os.system('clear')
+                exit()
             case _:
                 print("Sorry that's not a correct option. Try again")
                 input("Press enter to continue...")
