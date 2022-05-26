@@ -17,9 +17,12 @@ def run(app: VeloApp, user: User):
     cli_tools.clear()
 
     station = app.get_stations().get_stations()[int(station_id)]
-    user.put_bike_away(station)
+    succes = user.put_bike_away(station)
 
-    print(f'{user.get_name()} succesfully put a bike away at {station.get_name()}')
+    if succes:
+        print(f'{user.get_name()} succesfully put a bike away at {station.get_name()}')
+    else:
+        print(f'{user.get_name()} failed to put a bike away at {station.get_name()}. There are no free slots at this station.')
     cli_tools.wait_for_enter()
 
     login_menu.run(app)

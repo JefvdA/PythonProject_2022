@@ -40,8 +40,8 @@ class Station:
         return True # Succes - slot has been added
 
     def take_bike_from_slot(self) -> Bike:
-        if self.availableSlots <= 0:
-            return None # Fail - no slots available
+        if self.availableSlots >= self.get_total_slots():
+            return None # Fail - no bikes available
 
         # Find last slot with bike - take bike from slot - increase availableSlots
         index = len(self.slots) - self.availableSlots - 1

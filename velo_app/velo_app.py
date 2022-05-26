@@ -29,6 +29,8 @@ class VeloApp:
 
         [self.stations.add_bike() for i in range(4200)] # Add bikes to the stations
 
+        self.stations.add_station(Station("Test", 10)) # Add a test station
+
         self.users.generate_users(55000) # Generate users
         self.transporters.generate_users(300) # Generate transporters
 

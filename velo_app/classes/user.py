@@ -30,17 +30,19 @@ class User:
     def get_max_bikes(self) -> int:
         return self.MAX_BIKES
 
-    def take_bike(self, bike) -> bool:
+    def take_bike(self, station) -> bool:
         if self.get_bike_amount() < self.get_max_bikes():
-            self.bikes.append(bike)
-            return True
+            bike = station.take_bike_from_slot()
+            if bike is not None:
+                self.bikes.append(bike)
+                return True
+            return False
 
         return False
     
     def put_bike_away(self, station) -> bool:
         if self.get_bike_amount() > 0:
-            station.put_bike_in_slot(self.bikes.pop())
-            return True
+            return station.put_bike_in_slot(self.bikes.pop())
 
         return False
 
