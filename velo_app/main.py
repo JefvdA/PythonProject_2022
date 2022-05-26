@@ -19,21 +19,7 @@ def main():
     if(not os.path.exists(VELO_PICKLE)):
         app.initialize()
     else:
-        correct_input = False
-        while not correct_input:
-            correct_input = True
-
-            user_input = init_menu.get_user_choice()
-            match user_input:
-                case "1":
-                    app = VeloApp.load_data()
-                case "2":
-                    app.initialize()
-                case _:
-                    print("Sorry that's not a correct option. Try again")
-                    input("Press enter to continue...")
-                    os.system('clear')
-                    correct_input = False
+        init_menu.run(app)
     
     print(app)
     app.save_data()

@@ -26,14 +26,15 @@ class VeloApp:
 
         self.users.generate_users(55000) # Generate users
 
-    @staticmethod
-    def load_data():
+    def load_data(self):
         with open(VELO_PICKLE, "rb") as f:
-            return pickle.load(f)
+            temp_dict = pickle.load(f)
+            self.__dict__.clear()
+            self.__dict__.update(temp_dict)
 
     def save_data(self):
         with open(VELO_PICKLE, "wb") as f:
-            pickle.dump(self, f)
+            pickle.dump(self.__dict__, f, 2)
 
     
     # GETTERS SETTERS
