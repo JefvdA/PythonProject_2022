@@ -1,6 +1,7 @@
 import os
 
 from tools.menu_generator.menu import Menu
+import tools.cli_tools.tools as cli_tools
 
 from screens.actions import action_menu
 
@@ -23,7 +24,7 @@ def run(app: VeloApp):
         correct_input = True
 
         user_input = menu.get_user_input()
-        os.system('clear')
+        cli_tools.clear()
 
         show_user_list(app)
         match user_input:
@@ -35,8 +36,7 @@ def run(app: VeloApp):
                 user = app.get_users().get_user_by_name(user_name)
             case _:
                 print("Sorry that's not a correct option. Try again")
-                input("Press enter to continue...")
-                os.system('clear')
+                cli_tools.wait_for_enter()
                 correct_input = False
     
     if user is None:

@@ -1,6 +1,7 @@
 import os
 
 from tools.menu_generator.menu import Menu
+import tools.cli_tools.tools as cli_tools
 
 from velo_app import VeloApp
 
@@ -18,15 +19,13 @@ def run(app: VeloApp):
         correct_input = True
 
         user_input = menu.get_user_input()
+        cli_tools.clear()
         match user_input:
             case "1":
-                os.system('clear')
                 app.load_data()
             case "2":
-                os.system('clear')
                 app.initialize()
             case _:
                 print("Sorry that's not a correct option. Try again")
-                input("Press enter to continue...")
-                os.system('clear')
+                cli_tools.wait_for_enter()
                 correct_input = False
