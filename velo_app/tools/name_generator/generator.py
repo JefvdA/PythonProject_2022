@@ -11,6 +11,20 @@ FIRSTNAMES_JSON_PATH = os.path.join(DIRNAME, FIRSTNAMES_JSON)
 LASTNAMES_JSON_PATH = os.path.join(DIRNAME, LASTNAMES_JSON)
 
 
+def get_all_firstnames():
+    # 5493 possible firstnames
+    firstnames = []
+    with open(FIRSTNAMES_JSON_PATH) as json_file: 
+        firstnames = json.load(json_file)
+    return firstnames
+
+def get_all_lastnames():
+    # 5493 possible firstnames
+    lastnames = []
+    with open(LASTNAMES_JSON_PATH) as json_file: 
+        lastnames = json.load(json_file)
+    return lastnames
+
 def generate_firstname():
     # 5493 possible firstnames
     firstnames = []
@@ -50,6 +64,7 @@ def generate_names(amount):
     for i in range(amount):
         firstname = random.choice(firstnames)
         lastname = random.choice(lastnames)
-        names.append(firstname + " " + lastname)
+        name = firstname + " " + lastname
+        names.append(name)
     return names
             

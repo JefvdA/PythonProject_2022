@@ -12,6 +12,9 @@ class Users:
     def get_users(self):
         return self.users
 
+    def get_user_count(self):
+        return len(self.users)
+
     def generate_users(self, amount):
         names = name_generator.generate_names(amount)
         for i in range(amount):
