@@ -26,9 +26,10 @@ class VeloApp:
 
         self.users.generate_users(55000) # Generate users
 
-    def load_data(self):
+    @staticmethod
+    def load_data():
         with open(VELO_PICKLE, "rb") as f:
-            self = pickle.load(f)
+            return pickle.load(f)
 
     def save_data(self):
         with open(VELO_PICKLE, "wb") as f:
@@ -41,3 +42,12 @@ class VeloApp:
     
     def get_users(self):
         return self.users
+
+    # To string
+    def __str__(self) -> str:
+        return """Stations:\n
+        ____________________\n
+        """ + str(self.stations) + """
+        Users:\n
+        ____________________
+        """ + str(self.users)

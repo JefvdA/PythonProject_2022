@@ -26,7 +26,7 @@ def main():
             user_input = init_menu.get_user_choice()
             match user_input:
                 case "1":
-                    app.load_data()
+                    app = VeloApp.load_data()
                 case "2":
                     app.initialize()
                 case _:
@@ -35,7 +35,7 @@ def main():
                     os.system('clear')
                     correct_input = False
     
-    print(app.get_users().get_user_count())
+    print(app)
     app.save_data()
 
 if __name__ == "__main__":
