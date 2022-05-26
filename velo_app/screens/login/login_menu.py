@@ -4,6 +4,7 @@ from tools.menu_generator.menu import Menu
 
 from velo_app import VeloApp
 import screens.login.local_screens.user_login_menu as user_login_menu
+import screens.login.local_screens.transporter_login_menu as transporter_login_menu
 
 
 options = [
@@ -24,9 +25,8 @@ def run(app: VeloApp):
                 os.system('clear')
                 user_login_menu.run(app)
             case "2":
-                print("COMING SOON...")
-                input("Press enter to continue...")
                 os.system('clear')
+                transporter_login_menu.run(app)
             case _:
                 print("Sorry that's not a correct option. Try again")
                 input("Press enter to continue...")

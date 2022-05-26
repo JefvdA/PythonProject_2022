@@ -25,14 +25,14 @@ def run(app: VeloApp):
         user_input = menu.get_user_input()
         os.system('clear')
 
-        show_user_list(app)
+        show_transporter_list(app)
         match user_input:
             case "1":
                 user_id = input("Enter the id >>> ")
-                user = app.get_users().get_user_by_id(int(user_id))
+                user = app.get_transporters().get_user_by_id(int(user_id))
             case "2":
                 user_name = input("Enter the full name >>> ")
-                user = app.get_users().get_user_by_name(user_name)
+                user = app.get_transporters().get_user_by_name(user_name)
             case _:
                 print("Sorry that's not a correct option. Try again")
                 input("Press enter to continue...")
@@ -44,9 +44,9 @@ def run(app: VeloApp):
     else:
         action_menu.run(app, user)
 
-def show_user_list(app: VeloApp):
-    users = app.get_users().get_users()
-    print("""USERS:\n
+def show_transporter_list(app: VeloApp):
+    transporters = app.get_transporters().get_users()
+    print("""TRANSPORTERS:\n
     ____________________""")
-    for user in users:
-        print(user)
+    for transporter in transporters:
+        print(transporter)
