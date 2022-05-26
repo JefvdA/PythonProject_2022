@@ -1,6 +1,8 @@
 import random
+from typing import List
 
 from classes.bike import Bike
+from classes.station import Station
 
 
 class Stations:
@@ -10,7 +12,7 @@ class Stations:
     def add_station(self, station):
         self.stations.append(station)
 
-    def get_stations(self):
+    def get_stations(self) -> List[Station]:
         return self.stations
     
     def add_bike(self):        

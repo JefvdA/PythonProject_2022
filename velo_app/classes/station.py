@@ -19,6 +19,9 @@ class Station:
             slots.append(Slot(str(self.id) + "-" + str(i), None))
         return slots
 
+    def get_name(self) -> str:
+        return f'{self.id} : {self.steetName}'
+
     def get_total_slots(self) -> int:
         return len(self.slots)
 

@@ -43,13 +43,13 @@ class VeloApp:
             pickle.dump(self.__dict__, f)
     
     # GETTERS SETTERS
-    def get_stations(self):
+    def get_stations(self) -> Stations:
         return self.stations
     
-    def get_users(self):
+    def get_users(self) -> Users:
         return self.users
 
-    def get_transporters(self):
+    def get_transporters(self) -> Transporters:
         return self.transporters
 
     # To string
