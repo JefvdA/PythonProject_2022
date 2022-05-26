@@ -7,11 +7,11 @@ class Station:
     index = 0
 
     def __init__(self, streetName, slots):
-        Station.index += 1
         self.id = Station.index
         self.steetName = streetName
         self.availableSlots = slots
         self.slots = self.generate_slots(slots)
+        Station.index += 1
 
     def generate_slots(self, x) -> list[Slot]:
         slots = []
