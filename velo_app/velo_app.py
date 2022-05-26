@@ -2,8 +2,10 @@ import json
 import pickle
 
 from constants import VELO_JSON, VELO_PICKLE
+
 from classes.station import Station
 from repositories.stations import Stations
+from repositories.transporters import Transporters
 from repositories.users import Users
 
 
@@ -11,6 +13,7 @@ class VeloApp:
     def __init__(self) -> None:
         self.stations = Stations() # Initialize the stations object
         self.users = Users() # Initialize the users object
+        self.transporters = Transporters()
 
     def initialize(self):
         with open(VELO_JSON) as json_file: # Open the geojson file - Get the stations from the file
@@ -25,6 +28,7 @@ class VeloApp:
         [self.stations.add_bike() for i in range(4200)] # Add bikes to the stations
 
         self.users.generate_users(55000) # Generate users
+        self.transporters.generate_users(300) # Generate transporters
 
     def load_data(self):
         with open(VELO_PICKLE, "rb") as f:

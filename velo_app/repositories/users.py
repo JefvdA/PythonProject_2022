@@ -6,8 +6,8 @@ class Users:
     def __init__(self) -> None:
         self.users = []
     
-    def add_user(self, user):
-        self.users.append(user)
+    def add_user(self, firstname, lastname):
+        self.users.append(User(firstname, lastname))
     
     def get_users(self):
         return self.users
@@ -21,7 +21,7 @@ class Users:
             name = names[i]
             firstname = name.split(" ")[0]
             lastname = name.split(" ")[1]
-            self.add_user(User(firstname, lastname))
+            self.add_user(firstname, lastname)
 
     def __str__(self) -> str:
         string = ""
