@@ -1,5 +1,6 @@
-from classes.user import User
 import tools.name_generator.generator as name_generator
+
+from classes.user import User
 
 
 class Users:
@@ -14,6 +15,19 @@ class Users:
 
     def get_user_count(self):
         return len(self.users)
+
+    def get_user_by_id(self, id: int) -> User:
+        if id >= len(self.users) or id < 0:
+            return None
+
+        return self.users[id]
+
+    def get_user_by_name(self, name: str) -> User:
+        for user in self.users:
+            if user.get_name() == name:
+                return user
+                
+        return None
 
     def generate_users(self, amount):
         names = name_generator.generate_names(amount)

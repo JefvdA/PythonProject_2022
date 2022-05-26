@@ -15,6 +15,8 @@ class VeloApp:
         self.users = Users() # Initialize the users object
         self.transporters = Transporters()
 
+
+    # EVERYTHING WITH DATA
     def initialize(self):
         with open(VELO_JSON) as json_file: # Open the geojson file - Get the stations from the file
             data = json.load(json_file)
@@ -39,7 +41,6 @@ class VeloApp:
     def save_data(self):
         with open(VELO_PICKLE, "wb") as f:
             pickle.dump(self.__dict__, f)
-
     
     # GETTERS SETTERS
     def get_stations(self):
@@ -47,6 +48,9 @@ class VeloApp:
     
     def get_users(self):
         return self.users
+
+    def get_transporters(self):
+        return self.transporters
 
     # To string
     def __str__(self) -> str:

@@ -3,6 +3,7 @@ import os
 from tools.menu_generator.menu import Menu
 
 from velo_app import VeloApp
+import screens.login.local_screens.user_login_menu as user_login_menu
 
 
 options = [
@@ -20,9 +21,8 @@ def run(app: VeloApp):
         user_input = menu.get_user_input()
         match user_input:
             case "1":
-                print("COMING SOON...")
-                input("Press enter to continue...")
                 os.system('clear')
+                user_login_menu.run(app)
             case "2":
                 print("COMING SOON...")
                 input("Press enter to continue...")
