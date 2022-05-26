@@ -34,7 +34,7 @@ class VeloApp:
 
     def save_data(self):
         with open(VELO_PICKLE, "wb") as f:
-            pickle.dump(self.__dict__, f, 2)
+            pickle.dump(self.__dict__, f)
 
     
     # GETTERS SETTERS
