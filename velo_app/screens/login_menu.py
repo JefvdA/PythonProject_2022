@@ -6,8 +6,8 @@ from velo_app import VeloApp
 
 
 options = [
-    "Load data",
-    "Start fresh"
+    "Log in as a user",
+    "Log in as a transporter"
 ]
 
 def run(app: VeloApp):
@@ -20,11 +20,13 @@ def run(app: VeloApp):
         user_input = menu.get_user_input()
         match user_input:
             case "1":
+                print("COMING SOON...")
+                input("Press enter to continue...")
                 os.system('clear')
-                app.load_data()
             case "2":
+                print("COMING SOON...")
+                input("Press enter to continue...")
                 os.system('clear')
-                app.initialize()
             case _:
                 print("Sorry that's not a correct option. Try again")
                 input("Press enter to continue...")
