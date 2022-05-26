@@ -50,4 +50,4 @@ class VeloApp:
         """ + str(self.stations) + """
         Users:\n
         ____________________
-        """ + str(self.users)
+        """ + str(self.users.get_user_count())
