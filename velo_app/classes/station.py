@@ -31,6 +31,9 @@ class Station:
     def get_available_slots(self) -> int:
         return self.availableSlots
 
+    def get_bike_count(self) -> int:
+        return self.get_total_slots() - self.get_available_slots()
+
     def put_bike_in_slot(self, bike: Bike, user: User) -> bool:
         if self.availableSlots <= 0:
             return False # Fail - no slots available
