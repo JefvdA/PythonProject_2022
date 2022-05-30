@@ -20,7 +20,7 @@ class Stations:
         while not bike_is_added:
             index = random.randint(0, len(self.stations) - 1)
 
-            bike_is_added = self.stations[index].put_bike_in_slot(Bike())
+            bike_is_added = self.stations[index].put_bike_in_slot(Bike(), None)
 
     def __str__(self) -> str:
         string = ""

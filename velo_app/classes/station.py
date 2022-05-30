@@ -1,8 +1,8 @@
-from operator import index
+from tools.logger.logger import Logger
+
 from classes.bike import Bike
 from classes.slot import Slot
-from velo_app.classes.user import User
-from velo_app.tools.logger.logger import Logger
+from classes.user import User
 
 
 class Station:
@@ -13,6 +13,7 @@ class Station:
         self.steetName = streetName
         self.availableSlots = slots
         self.slots = self.generate_slots(slots)
+        self.logger = Logger()
         Station.index += 1
 
     def generate_slots(self, x) -> list[Slot]:
@@ -39,7 +40,8 @@ class Station:
         self.slots[index].leave_bike(bike)
         self.availableSlots -= 1
         
-        Logger.add_log(f'{user.get_name()} put a bike {bike.get_id()} away at {self.get_name()}')
+        if user is not None:
+            self.logger.add_log(f'{user.get_name()} put a bike {bike.get_id()} away at {self.get_name()}')
         return True # Succes - slot has been added
 
     def take_bike_from_slot(self, user: User) -> Bike:
@@ -51,7 +53,7 @@ class Station:
         bike = self.slots[index].take_bike()
         self.availableSlots += 1
 
-        Logger.add_log(f'{user.get_name()} took a bike {bike.get_id()} from {self.get_name()}')
+        self.logger.add_log(f'{user.get_name()} took a bike {bike.get_id()} from {self.get_name()}')
         return bike # Succes - bike has been taken, return it
 
     def __str__(self) -> str:

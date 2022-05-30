@@ -1,7 +1,8 @@
 from typing import List
 
+from tools.logger.logger import Logger
+
 from classes.bike import Bike
-from velo_app.tools.logger.logger import Logger
 
 
 class User:
@@ -13,6 +14,7 @@ class User:
         self.last_name = last_name
         self.bikes = []
         self.MAX_BIKES = 1
+        self.logger = Logger()
         User.index += 1
 
     # GETTERS / SETTERS
@@ -33,10 +35,10 @@ class User:
 
     def take_bike(self, station) -> bool:
         if self.get_bike_amount() < self.get_max_bikes():
-            bike: Bike = station.take_bike_from_slot()
+            bike: Bike = station.take_bike_from_slot(self)
             if bike is not None:
                 self.bikes.append(bike)
-                Logger.add_log(f'{self.get_name()} took a bike {bike.get_id()} from {station.get_name()}')
+                self.logger.add_log(f'{self.get_name()} took a bike {bike.get_id()} from {station.get_name()}')
                 return True
             return False
 
@@ -45,9 +47,9 @@ class User:
     def put_bike_away(self, station) -> bool:
         if self.get_bike_amount() > 0:
             bike: Bike = self.bikes.pop()
-            succes = station.put_bike_in_slot(bike)
+            succes = station.put_bike_in_slot(bike, self)
             if succes:
-                Logger.add_log(f'{self.get_name()} put a bike {bike.get_id()} away at {station.get_name()}')
+                self.logger.add_log(f'{self.get_name()} put a bike {bike.get_id()} away at {station.get_name()}')
             else:
                 self.bikes.append(bike)
             return succes
