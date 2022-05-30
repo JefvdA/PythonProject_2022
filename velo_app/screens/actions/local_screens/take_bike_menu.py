@@ -3,7 +3,7 @@ import os
 import tools.cli_tools.tools as cli_tools
 
 from screens.actions.local_screens import station_list
-from screens.login import login_menu
+import screens.main.main_menu as main_menu
 
 from classes.user import User
 from velo_app import VeloApp
@@ -25,4 +25,4 @@ def run(app: VeloApp, user: User):
         print(f'{user.get_name()} failed to take a bike from {station.get_name()}. There are no bikes available at this station.')
     cli_tools.wait_for_enter()
 
-    login_menu.run(app)
+    main_menu.run(app)

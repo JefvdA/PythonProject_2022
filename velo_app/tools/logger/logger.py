@@ -1,5 +1,5 @@
 """
-Logger class is used to log messages, which can be used to generate html logs.
+Logger class is used to log messages
 """
 
 from datetime import datetime
@@ -16,10 +16,3 @@ class Logger():
 
     def get_logs(self):
         return self.logs
-
-    def generate_html(self):
-        html = '<html><body>'
-        for log in self.logs:
-            html += f'<p>{log}</p>'
-        html += '</body></html>'
-        return html

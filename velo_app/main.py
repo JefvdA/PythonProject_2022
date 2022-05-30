@@ -11,7 +11,7 @@ import os
 from constants import VELO_PICKLE
 from velo_app import VeloApp
 import screens.initialize_menu as init_menu
-import screens.login.login_menu as login_menu
+import screens.main.main_menu as main_menu
 
 
 def main():
@@ -24,7 +24,7 @@ def main():
         os.system('clear')
         init_menu.run(app)
     
-    login_menu.run(app)
+    main_menu.run(app)
     
     app.save_data() # App is closing, save data
 
