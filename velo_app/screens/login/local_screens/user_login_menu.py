@@ -26,7 +26,6 @@ def run(app: VeloApp):
         user_input = menu.get_user_input()
         cli_tools.clear()
 
-        show_user_list(app)
         match user_input:
             case "1":
                 user_id = input("Enter the id >>> ")
@@ -43,10 +42,3 @@ def run(app: VeloApp):
         run(app)
     else:
         action_menu.run(app, user)
-
-def show_user_list(app: VeloApp):
-    users = app.get_users().get_users()
-    print("""USERS:\n
-    ____________________""")
-    for user in users:
-        print(user)
