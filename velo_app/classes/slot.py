@@ -11,3 +11,6 @@ class Slot:
         self.bike = None
 
         return bike
+
+    def leave_bike(self, bike: Bike) -> None:
+        self.bike = bike

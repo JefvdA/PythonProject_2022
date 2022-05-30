@@ -1,6 +1,8 @@
 from operator import index
 from classes.bike import Bike
 from classes.slot import Slot
+from velo_app.classes.user import User
+from velo_app.tools.logger.logger import Logger
 
 
 class Station:
@@ -28,18 +30,19 @@ class Station:
     def get_available_slots(self) -> int:
         return self.availableSlots
 
-    def put_bike_in_slot(self, bike) -> bool:
+    def put_bike_in_slot(self, bike: Bike, user: User) -> bool:
         if self.availableSlots <= 0:
             return False # Fail - no slots available
         
         # Find next available slot with 'availableSlots' - put bike in slot - decrease availableSlots
         index = len(self.slots) - self.availableSlots
-        self.slots[index].bike = bike
+        self.slots[index].leave_bike(bike)
         self.availableSlots -= 1
         
+        Logger.add_log(f'{user.get_name()} put a bike {bike.get_id()} away at {self.get_name()}')
         return True # Succes - slot has been added
 
-    def take_bike_from_slot(self) -> Bike:
+    def take_bike_from_slot(self, user: User) -> Bike:
         if self.availableSlots >= self.get_total_slots():
             return None # Fail - no bikes available
 
@@ -48,6 +51,7 @@ class Station:
         bike = self.slots[index].take_bike()
         self.availableSlots += 1
 
+        Logger.add_log(f'{user.get_name()} took a bike {bike.get_id()} from {self.get_name()}')
         return bike # Succes - bike has been taken, return it
 
     def __str__(self) -> str:
