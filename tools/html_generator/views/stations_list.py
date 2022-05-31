@@ -42,6 +42,7 @@ def generate_html(stations: Stations):
                                 <th scope="col">#</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Bikes</th>
+                                <th scope="col">Slots</th>
                             </tr>
                         </thead>"""
 
@@ -51,6 +52,7 @@ def generate_html(stations: Stations):
                 <th scope="row">{station.id}</th>
                 <td>{station.streetName}</td>
                 <td>{station.get_bike_count()}</td>
+                <td>{station.get_total_slots()}</td>
             </tr>"""
     
 
