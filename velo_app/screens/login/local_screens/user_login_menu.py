@@ -1,9 +1,7 @@
-import os
-
 from tools.menu_generator.menu import Menu
 import tools.cli_tools.tools as cli_tools
 
-from screens.actions import action_menu
+from screens.user_actions import user_actions_menu
 
 from classes.user import User
 from velo_app import VeloApp
@@ -41,4 +39,4 @@ def run(app: VeloApp):
     if user is None:
         run(app)
     else:
-        action_menu.run(app, user)
+        user_actions_menu.run(app, user)

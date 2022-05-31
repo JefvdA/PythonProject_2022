@@ -1,6 +1,6 @@
 import tools.cli_tools.tools as cli_tools
 
-from screens.actions.local_screens import station_list
+from screens.user_actions.local_screens import station_list
 import screens.main.main_menu as main_menu
 
 from classes.user import User
