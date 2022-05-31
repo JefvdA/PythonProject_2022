@@ -3,8 +3,8 @@ import os
 from tools.menu_generator.menu import Menu
 import tools.cli_tools.tools as cli_tools
 
-from screens.actions.local_screens import take_bike_menu
-from screens.actions.local_screens import put_bike_away_menu
+from screens.user_actions.local_screens import take_bike_menu
+from screens.user_actions.local_screens import put_bike_away_menu
 
 from classes.user import User
 from velo_app import VeloApp
