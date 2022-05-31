@@ -1,5 +1,3 @@
-import os
-
 from tools.menu_generator.menu import Menu
 import tools.cli_tools.tools as cli_tools
 

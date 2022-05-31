@@ -1,10 +1,15 @@
+from constants import HTML_DIR
 from .. import generator
+from . import station_log
 
 from repositories.stations import Stations
 
 def run(stations: Stations):
     html = generate_html(stations)
     generator.generate_html_file("stations_list", "stations", html)
+
+    for station in stations.get_stations():
+        station_log.run(station)
 
 def generate_html(stations: Stations):
     """
@@ -42,6 +47,7 @@ def generate_html(stations: Stations):
                                 <th scope="col">Name</th>
                                 <th scope="col">Bikes</th>
                                 <th scope="col">Slots</th>
+                                <th scope="col">Logs</th>
                             </tr>
                         </thead>"""
 
@@ -52,6 +58,7 @@ def generate_html(stations: Stations):
                 <td>{station.streetName}</td>
                 <td>{station.get_bike_count()}</td>
                 <td>{station.get_total_slots()}</td>
+                <td><a href="{HTML_DIR}/stations/logs/station_{station.get_id()}.html">Logs</a></td>
             </tr>"""
     
 

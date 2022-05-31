@@ -9,7 +9,6 @@ from velo_app import VeloApp
 
 options = [
     "Overviews of all stations",
-    "Logs for a specific station",
     "Logs for a specific user",
     "Logs for a specific bike",
 ]
@@ -27,10 +26,6 @@ def run(app: VeloApp):
             case "1":
                 stations = app.get_stations()
                 station_list_html.run(stations)
-            case "2":
-                station_id = int(cli_tools.get_user_input("Enter station id: "))
-                station = app.get_stations().get_stations()[station_id]
-                station_log_html.run(station)
             case _:
                 print("Sorry that's not a correct option. Try again")
                 cli_tools.wait_for_enter()
