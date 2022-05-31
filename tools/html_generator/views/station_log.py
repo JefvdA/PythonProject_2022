@@ -1,18 +1,18 @@
 from .. import generator
 
-from repositories.stations import Stations
+from classes.station import Station
 
-def run(stations: Stations):
-    html = generate_html(stations)
-    generator.generate_html_file("stations_list", "stations", html)
+def run(station: Station):
+    html = generate_html(station)
+    generator.generate_html_file(f"station_{station.get_id()}", "stations/logs", html)
 
-def generate_html(stations: Stations):
+def generate_html(station: Station):
     """
-    Generate HTML code for stations list.
+    Generate HTML code for all logs of a station.
     :param stations: Stations object
     :return: HTML code
     """
-    html = """
+    html = f"""
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -30,7 +30,7 @@ def generate_html(stations: Stations):
             </div>
             <div class="row">
                 <div class="col-12">
-                    <h2>Stations</h2>
+                    <h2>Station {station.get_name()}</h2>
                 </div>
             </div>
             <div class="row">
@@ -38,23 +38,20 @@ def generate_html(stations: Stations):
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Bikes</th>
-                                <th scope="col">Slots</th>
+                                <th scope="col">Time</th>
+                                <th scope="col">message</th>
                             </tr>
-                        </thead>"""
+                        </thead>
+    """
 
-    for station in stations.stations:
+    for log in station.get_logger().get_logs():
         html += f"""
-            <tr>
-                <th scope="row">{station.id}</th>
-                <td>{station.streetName}</td>
-                <td>{station.get_bike_count()}</td>
-                <td>{station.get_total_slots()}</td>
-            </tr>"""
+        <tr>
+            <th scope="row">{log.get_time()}</th>
+            <td>{log.get_message()}</td>
+        </tr>
+        """
     
-
     html += """
                         </table>
                 </div>

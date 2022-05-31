@@ -1,9 +1,9 @@
-import imp
 from tools.menu_generator.menu import Menu
 
 import tools.cli_tools.tools as cli_tools
 
 import tools.html_generator.views.stations_list as station_list_html
+import tools.html_generator.views.station_log as station_log_html
 
 from velo_app import VeloApp
 
@@ -27,6 +27,10 @@ def run(app: VeloApp):
             case "1":
                 stations = app.get_stations()
                 station_list_html.run(stations)
+            case "2":
+                station_id = int(cli_tools.get_user_input("Enter station id: "))
+                station = app.get_stations().get_stations()[station_id]
+                station_log_html.run(station)
             case _:
                 print("Sorry that's not a correct option. Try again")
                 cli_tools.wait_for_enter()

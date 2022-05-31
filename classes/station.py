@@ -22,6 +22,9 @@ class Station:
             slots.append(Slot(str(self.id) + "-" + str(i), None))
         return slots
 
+    def get_id(self) -> int:
+        return self.id
+
     def get_name(self) -> str:
         return f'{self.id} : {self.streetName}'
 
@@ -33,6 +36,9 @@ class Station:
 
     def get_bike_count(self) -> int:
         return self.get_total_slots() - self.get_available_slots()
+
+    def get_logger(self) -> Logger:
+        return self.logger
 
     def put_bike_in_slot(self, bike: Bike, user: User) -> bool:
         if self.availableSlots <= 0:
