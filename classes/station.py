@@ -10,7 +10,7 @@ class Station:
 
     def __init__(self, streetName, slots):
         self.id = Station.index
-        self.steetName = streetName
+        self.streetName = streetName
         self.availableSlots = slots
         self.slots = self.generate_slots(slots)
         self.logger = Logger()
@@ -23,7 +23,7 @@ class Station:
         return slots
 
     def get_name(self) -> str:
-        return f'{self.id} : {self.steetName}'
+        return f'{self.id} : {self.streetName}'
 
     def get_total_slots(self) -> int:
         return len(self.slots)
@@ -60,4 +60,4 @@ class Station:
         return bike # Succes - bike has been taken, return it
 
     def __str__(self) -> str:
-        return "Station " + str(self.id) + ": " + self.steetName + " (" + str(len(self.slots) - self.availableSlots) + " / " + str(len(self.slots)) + " slots taken)"
+        return "Station " + str(self.id) + ": " + self.streetName + " (" + str(len(self.slots) - self.availableSlots) + " / " + str(len(self.slots)) + " slots taken)"

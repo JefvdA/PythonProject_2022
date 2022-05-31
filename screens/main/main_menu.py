@@ -31,10 +31,6 @@ def run(app: VeloApp):
                 cli_tools.wait_for_enter()
                 correct_input = False
             case "3":
-                print("COMING SOON!")
-                cli_tools.wait_for_enter()
-                correct_input = False
-            case "4":
                 logging_menu.run(app)
             case _:
                 print("Sorry that's not a correct option. Try again")

@@ -4,7 +4,7 @@ from repositories.stations import Stations
 
 def run(stations: Stations):
     html = generate_html(stations)
-    generator.generate_html_file("stations_list.html", "stations", html)
+    generator.generate_html_file("stations_list", "stations", html)
 
 def generate_html(stations: Stations):
     """
@@ -60,3 +60,5 @@ def generate_html(stations: Stations):
             </div>
         </div>
     </body>"""
+
+    return html
