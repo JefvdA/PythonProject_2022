@@ -34,7 +34,7 @@ def run(app: VeloApp):
                 cli_tools.wait_for_enter()
                 correct_input = False
             case "4":
-                exit()
+                pass
             case _:
                 print("Sorry that's not a correct option. Try again")
                 cli_tools.wait_for_enter()
