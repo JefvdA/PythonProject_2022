@@ -1,7 +1,8 @@
+import random
 import tools.name_generator.generator as name_generator
 
 from classes.user import User
-
+from classes.station import Station
 
 class Users:
     def __init__(self) -> None:
@@ -28,6 +29,32 @@ class Users:
                 return user
                 
         return None
+
+    def get_random_user(self) -> User:
+        return self.users[random.randint(0, self.get_user_count() - 1)]
+
+    def get_random_user_with_bike(self) -> User:
+        users = list(filter(lambda u: u.get_bike_amount() > 0, self.users))
+
+        if len(users) == 0:
+            return None
+
+        return users[random.randint(0, len(users) - 1)]
+
+    def get_random_user_without_bike(self) -> User:
+        users = list(filter(lambda u: u.get_bike_amount() == 0, self.users))
+
+        if len(users) == 0:
+            return None
+                 
+        return users[random.randint(0, len(users) - 1)]
+
+    def activate_user(self, user) -> None:
+        if user in self.activate_users:
+            return
+        
+        if user in self.users:
+            self.activate_users.append(user)
 
     def generate_users(self, amount):
         names = name_generator.generate_names(amount)

@@ -14,6 +14,9 @@ class Stations:
 
     def get_stations(self) -> List[Station]:
         return self.stations
+
+    def get_random_station(self) -> Station:
+        return self.stations[random.randint(0, len(self.stations) - 1)]
     
     def add_bike(self):        
         bike_is_added = False
