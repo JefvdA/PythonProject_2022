@@ -1,4 +1,4 @@
-import generator
+from .. import generator
 
 from repositories.stations import Stations
 

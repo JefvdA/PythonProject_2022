@@ -2,6 +2,7 @@ from tools.menu_generator.menu import Menu
 import tools.cli_tools.tools as cli_tools
 
 import screens.login.login_menu as login_menu
+import screens.logging.logging_menu as logging_menu
 
 from velo_app import VeloApp
 
@@ -34,7 +35,7 @@ def run(app: VeloApp):
                 cli_tools.wait_for_enter()
                 correct_input = False
             case "4":
-                pass
+                logging_menu.run(app)
             case _:
                 print("Sorry that's not a correct option. Try again")
                 cli_tools.wait_for_enter()
