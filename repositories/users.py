@@ -2,7 +2,6 @@ import random
 import tools.name_generator.generator as name_generator
 
 from classes.user import User
-from classes.station import Station
 
 class Users:
     def __init__(self) -> None:

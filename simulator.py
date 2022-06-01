@@ -29,6 +29,9 @@ from velo_app import VeloApp
 
 
 class Simulator:
+    time = None
+    seconds = 0
+
     def __init__(self, app: VeloApp, time_multiplier: str) -> None:
         self.app = app
         
@@ -41,6 +44,9 @@ class Simulator:
         self.sim = threading.Thread(target=self.run_simulation)
 
     def start(self) -> None:
+        Simulator.time = datetime.datetime.now()
+        Simulator.seconds = 0
+
         if not self.simulation_live:
             self.simulation_live = True
             self.sim.start()
@@ -54,24 +60,26 @@ class Simulator:
             self.simulation_live = False
             self.sim.join()
         
+        Simulator.time = None
+        Simulator.seconds = 0
+        
     def run_simulation(self) -> None:
         users: Users = self.app.get_users()
         transporters: Transporters = self.app.get_transporters()
         stations: Stations = self.app.get_stations()
 
-        seconds = 0
         while self.simulation_live:
             cli_tools.clear()
-            print(f"Simulation is running X{self.time_multiplier}, press ENTER to stop it.")
-            print(f"Elapsed time in the simulation: {str(datetime.timedelta(seconds=seconds))}")
+            print(f"Simulation is running (x{self.time_multiplier}), press ENTER to stop it.")
+            print(f"Elapsed time in the simulation: {str(datetime.timedelta(seconds=Simulator.seconds))}")
 
-            if seconds % 5 == 0: # Every 5 seconds 1 user will take a bike / put a bike away.
+            if Simulator.seconds % 5 == 0: # Every 5 seconds 1 user will take a bike / put a bike away.
                 self.do_user_action(users, stations)
-            if seconds % 10 == 0: # Every 10 seconds 1 transporter will take bikes from a full station (+75%) and fill an empty station (+25%).
+            if Simulator.seconds % 10 == 0: # Every 10 seconds 1 transporter will take bikes from a full station (+75%) and fill an empty station (+25%).
                 self.do_transporter_action(transporters, stations)
 
             time.sleep(1 / self.time_multiplier)
-            seconds += 1
+            Simulator.seconds += 1
 
     def do_user_action(self, users: Users, stations: Stations) -> None:
         user_action_completed = False

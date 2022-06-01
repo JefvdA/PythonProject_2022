@@ -4,6 +4,8 @@ Logger class is used to log messages
 
 from datetime import datetime
 
+from simulator import Simulator
+
 
 class Logger():
 
@@ -19,12 +21,15 @@ class Logger():
 
 class Log():
     
-        def __init__(self, message):
-            self.message = message
+    def __init__(self, message):
+        self.message = message
+        if Simulator.time is None:
             self.time = datetime.now()
-    
-        def get_message(self):
-            return self.message
-    
-        def get_time(self):
-            return self.time
+        else:
+            self.time = Simulator.time + datetime.timedelta(seconds=Simulator.seconds)
+
+    def get_message(self):
+        return self.message
+
+    def get_time(self):
+        return self.time
