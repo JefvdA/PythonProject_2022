@@ -2,7 +2,7 @@
 Logger class is used to log messages
 """
 
-from datetime import datetime
+import datetime
 
 from simulator import Simulator
 
@@ -24,7 +24,7 @@ class Log():
     def __init__(self, message):
         self.message = message
         if Simulator.time is None:
-            self.time = datetime.now()
+            self.time = datetime.datetime.now()
         else:
             self.time = Simulator.time + datetime.timedelta(seconds=Simulator.seconds)
 

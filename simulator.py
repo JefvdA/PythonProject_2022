@@ -17,22 +17,12 @@ import time
 
 import tools.cli_tools.tools as cli_tools
 
-from repositories.stations import Stations
-from repositories.users import Users
-from repositories.transporters import Transporters
-
-from classes.user import User
-from classes.station import Station
-from classes.transporter import Transporter
-
-from velo_app import VeloApp
-
 
 class Simulator:
     time = None
     seconds = 0
 
-    def __init__(self, app: VeloApp, time_multiplier: str) -> None:
+    def __init__(self, app, time_multiplier: str) -> None:
         self.app = app
         
         try:
@@ -64,9 +54,9 @@ class Simulator:
         Simulator.seconds = 0
         
     def run_simulation(self) -> None:
-        users: Users = self.app.get_users()
-        transporters: Transporters = self.app.get_transporters()
-        stations: Stations = self.app.get_stations()
+        users = self.app.get_users()
+        transporters = self.app.get_transporters()
+        stations = self.app.get_stations()
 
         while self.simulation_live:
             cli_tools.clear()
@@ -81,23 +71,23 @@ class Simulator:
             time.sleep(1 / self.time_multiplier)
             Simulator.seconds += 1
 
-    def do_user_action(self, users: Users, stations: Stations) -> None:
+    def do_user_action(self, users, stations) -> None:
         user_action_completed = False
         while not user_action_completed:
-            station: Station = stations.get_random_station()
+            station = stations.get_random_station()
 
             rng = random.randint(0, 100)
             if rng <= 50:
-                user: User = users.get_random_user_with_bike()
+                user = users.get_random_user_with_bike()
                 
                 if user is not None:
                     user_action_completed = user.put_bike_away(station)
             else:
-                user: User = users.get_random_user_without_bike()
+                user = users.get_random_user_without_bike()
                 
                 if user is not None:
                     user_action_completed = user.take_bike(station)
 
-    def do_transporter_action(self, transporters: Transporters, stations: Stations) -> None:
-        transporter: Transporter = transporters.get_random_user()
+    def do_transporter_action(self, transporters, stations) -> None:
+        transporter = transporters.get_random_user()
         
