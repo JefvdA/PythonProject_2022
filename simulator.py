@@ -4,15 +4,18 @@ Time multiplier can be set to slow down / speed up the simulation.
 
 Default time multiplier is real-time 1 sec / 1 sec.
 
-Every second 1 user will take a bike / put a bike away.
-    What user, will be random, and the action is determined by if it already has a bike or not.
+Every 5 seconds 1 user will take a bike / put a bike away.
+    The action is chosen random (50/50), and a user is chosen based on the action (user with bike / without bike)
 
-Every 5 seconds 1 transporter will take bikes from a full station (+75%) and fill an empty station (+25%).
+Every 10 seconds 1 transporter will take bikes from a full station (+75%) and fill an empty station (+25%).
 """
 
+import datetime
 import random
 import threading
 import time
+
+import tools.cli_tools.tools as cli_tools
 
 from repositories.stations import Stations
 from repositories.users import Users
@@ -26,13 +29,13 @@ from velo_app import VeloApp
 
 
 class Simulator:
-    def __init__(self, app: VeloApp, time_multiplier: int) -> None:
+    def __init__(self, app: VeloApp, time_multiplier: str) -> None:
         self.app = app
         
-        if time_multiplier is "":
+        try:
+            self.time_multiplier = int(time_multiplier)
+        except:
             self.time_multiplier = 1
-        else:
-            self.time_multiplier = time_multiplier
 
         self.simulation_live = False
         self.sim = threading.Thread(target=self.run_simulation)
@@ -41,6 +44,10 @@ class Simulator:
         if not self.simulation_live:
             self.simulation_live = True
             self.sim.start()
+        
+        cli_tools.wait_for_enter() 
+
+        self.stop()
 
     def stop(self) -> None:
         if self.simulation_live:
@@ -54,12 +61,14 @@ class Simulator:
 
         seconds = 0
         while self.simulation_live:
-            if seconds >= 5:
-                transporter: Transporter = transporters.get_random_user()
-                self.do_transporter_action(transporter, stations)
-                seconds = 0
+            cli_tools.clear()
+            print(f"Simulation is running X{self.time_multiplier}, press ENTER to stop it.")
+            print(f"Elapsed time in the simulation: {str(datetime.timedelta(seconds=seconds))}")
 
-            self.do_user_action(users, stations)
+            if seconds % 5 == 0: # Every 5 seconds 1 user will take a bike / put a bike away.
+                self.do_user_action(users, stations)
+            if seconds % 10 == 0: # Every 10 seconds 1 transporter will take bikes from a full station (+75%) and fill an empty station (+25%).
+                self.do_transporter_action(transporters, stations)
 
             time.sleep(1 / self.time_multiplier)
             seconds += 1
@@ -81,8 +90,6 @@ class Simulator:
                 if user is not None:
                     user_action_completed = user.take_bike(station)
 
-        print(f"{user.get_name()} took a bike from station {station.get_name()}.")
-
-    def do_transporter_action(self, transporter: Transporter, stations: Stations) -> None:
-        pass
+    def do_transporter_action(self, transporters: Transporters, stations: Stations) -> None:
+        transporter: Transporter = transporters.get_random_user()
         

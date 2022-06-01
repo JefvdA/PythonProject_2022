@@ -13,7 +13,7 @@ options = [
 ]
 
 def run(app: VeloApp):
-    menu = Menu(options)
+    menu = Menu(options) 
 
     correct_input = False
     while not correct_input:
