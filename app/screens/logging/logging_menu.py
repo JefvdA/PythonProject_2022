@@ -7,12 +7,9 @@ import tools.html_generator.views.stations_list as station_list_html
 import screens.main.main_menu as main_menu
 
 from velo_app import VeloApp
-from constants import SITE_DIR
 
 options = [
     "Overviews of all stations",
-    "Logs for a specific user",
-    "Logs for a specific bike",
 ]
 
 def run(app: VeloApp):

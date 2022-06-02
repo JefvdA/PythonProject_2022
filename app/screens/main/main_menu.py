@@ -10,7 +10,6 @@ from velo_app import VeloApp
 
 options = [
     "Log in",
-    "Register",
     "Generate logs",
     "Start simulation",
     "Exit"
@@ -29,14 +28,10 @@ def run(app: VeloApp):
             case "1":
                 login_menu.run(app)
             case "2":
-                print("COMING SOON!")
-                cli_tools.wait_for_enter()
-                correct_input = False
-            case "3":
                 logging_menu.run(app)
-            case "4":
+            case "3":
                 simulation_menu.run(app)
-            case "5":
+            case "4":
                 pass
             case _:
                 print("Sorry that's not a correct option. Try again")
