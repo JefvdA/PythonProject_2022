@@ -16,11 +16,11 @@ options = [
 def run(app: VeloApp, user: User):
     cli_tools.clear()
 
-    if user.get_bike_amount() == 0:
+    if user.get_bike_count() == 0:
         take_bike_menu.run(app, user)
         return
 
-    if user.get_bike_amount() == user.get_max_bikes():
+    if user.get_bike_count() == user.get_max_bikes():
         put_bike_away_menu.run(app, user)
         return
 

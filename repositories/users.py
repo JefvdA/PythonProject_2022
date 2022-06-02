@@ -33,7 +33,7 @@ class Users:
         return self.users[random.randint(0, self.get_user_count() - 1)]
 
     def get_random_user_with_bike(self) -> User:
-        users = list(filter(lambda u: u.get_bike_amount() > 0, self.users))
+        users = list(filter(lambda u: u.get_bike_count() > 0, self.users))
 
         if len(users) == 0:
             return None
@@ -41,7 +41,7 @@ class Users:
         return users[random.randint(0, len(users) - 1)]
 
     def get_random_user_without_bike(self) -> User:
-        users = list(filter(lambda u: u.get_bike_amount() == 0, self.users))
+        users = list(filter(lambda u: u.get_bike_count() == 0, self.users))
 
         if len(users) == 0:
             return None
