@@ -33,6 +33,8 @@ class Simulator:
         self.simulation_live = False
         self.sim = threading.Thread(target=self.run_simulation)
 
+        self.active_transporters = []
+
     def start(self) -> None:
         Simulator.time = datetime.datetime.now()
         Simulator.seconds = 0
@@ -92,17 +94,28 @@ class Simulator:
         tries = 0
         transporter_action_completed = False
         while not transporter_action_completed and tries < 10: # Try 10 times to find a transporter that can do the action.
-            transporter = transporters.get_random_user()
             station = stations.get_random_station()
 
             station_bike_percentage = station.get_bike_percentage()
-            if station_bike_percentage < 75:
+
+            new_transporters_needed = len(self.active_transporters) < 4
+
+            if station_bike_percentage > 75 and new_transporters_needed:
+                transporter = transporters.get_random_user()
                 transporter_action_completed = transporter.take_bike(station, station.get_bike_count() / 2)
-            else:
-                transporter_action_completed = transporter.put_bike_away(station, transporter.get_bike_count() / 2)
+
+                if transporter_action_completed:
+                    self.active_transporters.append(transporter)
+            elif station_bike_percentage < 25 and len(self.active_transporters) > 0:
+                transporter = self.active_transporters[0]
+
+                amount = 8
+                if transporter.get_bike_count() > amount:
+                    amount = transporter.get_bike_count() / 2
+                transporter_action_completed = transporter.put_bike_away(station, amount)
+
+                if(transporter.get_bike_count() == 0):
+                    self.active_transporters.remove(transporter)
 
             tries += 1
-
-        if transporter_action_completed:
-            print(f"Transporter {transporter.get_name()} took bikes from {station.get_name()}.")
         
