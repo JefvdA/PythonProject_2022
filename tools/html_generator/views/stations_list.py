@@ -1,4 +1,4 @@
-from constants import HTML_DIR
+from constants import SITE_DIR
 from .. import generator
 from . import station_log
 
@@ -58,7 +58,7 @@ def generate_html(stations: Stations):
                 <td>{station.streetName}</td>
                 <td>{station.get_bike_count()}</td>
                 <td>{station.get_total_slots()}</td>
-                <td><a href="{HTML_DIR}/stations/logs/station_{station.get_id()}.html">Logs</a></td>
+                <td><a href="{SITE_DIR}/stations/logs/station_{station.get_id()}.html">Logs</a></td>
             </tr>"""
     
 
