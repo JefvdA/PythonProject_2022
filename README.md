@@ -107,7 +107,7 @@ Een probleem waar ik wel tegen viel, en wat ik ook niet heb kunnen oplossen is d
 Wanneer je op het moment de simulatie 3u laat draaien (in simulatie tijd) en daarna manuele acties gaat uitvoeren, dan zullen de logs van deze manuele acties nog steeds de echte tijd (datetime.now()) weergeven, en voer je dus eigenlijk de acties "in het verleden" uit.
 Eerst wou ik proberen ervoor te zorgen dat wanneer een simulatie geweest is, je ook vanaf de zogezegde tijd na de simulatie verder gaat loggen bij manuele acties, maar dit nam heel veel tijd in beslag omdat alles in heel veel files is bijgehouden.
 
-#
+# Conclusie
 Ik denk dat ik soms ook gewoon teveel files heb aangemaakt, en dat ik teveel probeerde te programmeren zoals in andere talen en me meer moest aanpassen aan python.
 Ik denk wel dat als ik dit project opnieuw zou maken dit al heel wat beter zal gaan, aangezien het me echt wel veel heeft bijgeleerd.
 
