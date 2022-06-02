@@ -37,6 +37,9 @@ class Station:
     def get_bike_count(self) -> int:
         return self.get_total_slots() - self.get_available_slots()
 
+    def get_bike_percentage(self) -> int:
+        return int((self.get_bike_count() / self.get_total_slots()) * 100)
+
     def get_logger(self) -> Logger:
         return self.logger
 

@@ -28,7 +28,7 @@ def run(app: VeloApp, user: User):
     main_menu.run(app)
 
 def show_bike_list(user: User):
-    print(f'You are currently riding {user.get_bike_amount()} bikes, out of {user.get_max_bikes()}')
+    print(f'You are currently riding {user.get_bike_count()()} bikes, out of {user.get_max_bikes()}')
     print("""BIKES:\n
     ____________________""")
 

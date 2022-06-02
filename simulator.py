@@ -7,7 +7,7 @@ Default time multiplier is real-time 1 sec / 1 sec.
 Every 5 seconds 1 user will take a bike / put a bike away.
     The action is chosen random (50/50), and a user is chosen based on the action (user with bike / without bike)
 
-Every 10 seconds 1 transporter will take bikes from a full station (+75%) and fill an empty station (+25%).
+Every 10 seconds 1 transporter will take bikes from a full station (>75%) and fill an empty station (<25%).
 """
 
 import datetime
@@ -89,5 +89,20 @@ class Simulator:
                     user_action_completed = user.take_bike(station)
 
     def do_transporter_action(self, transporters, stations) -> None:
-        transporter = transporters.get_random_user()
+        tries = 0
+        transporter_action_completed = False
+        while not transporter_action_completed and tries < 10: # Try 10 times to find a transporter that can do the action.
+            transporter = transporters.get_random_user()
+            station = stations.get_random_station()
+
+            station_bike_percentage = station.get_bike_percentage()
+            if station_bike_percentage < 75:
+                transporter_action_completed = transporter.take_bike(station, station.get_bike_count() / 2)
+            else:
+                transporter_action_completed = transporter.put_bike_away(station, transporter.get_bike_count() / 2)
+
+            tries += 1
+
+        if transporter_action_completed:
+            print(f"Transporter {transporter.get_name()} took bikes from {station.get_name()}.")
         
